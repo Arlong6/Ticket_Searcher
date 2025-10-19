@@ -2,85 +2,13 @@ import requests
 import time
 import json
 from datetime import datetime, timedelta
+from utils import *
 from parameters import *
 from email_formatter import EmailFormatter
 
-# API URLs (測試環境)
-TOKEN_URL = "https://test.api.amadeus.com/v1/security/oauth2/token"
-FLIGHT_SEARCH_URL = "https://test.api.amadeus.com/v2/shopping/flight-offers"
 
-# 檔案設定
-LAST_PRICE_FILE = "last_price.txt"
-HISTORY_LOG_FILE = "flight_history.txt"
-ERROR_LOG_FILE = "flight_error.txt"
-EMAIL_CONTENT_FILE = "email_content.txt"
-EXECUTION_LOG_FILE = "execution.log"
 
-# 機場代碼對應中文名稱
-AIRPORT_NAMES = {
-    "TPE": "台北桃園", "NRT": "東京成田", "HND": "東京羽田",
-    "KIX": "大阪關西", "NGO": "名古屋中部", "FUK": "福岡",
-    "CTS": "札幌新千歲", "ITM": "大阪伊丹", "OSA": "大阪",
-    "ICN": "首爾仁川", "SIN": "新加坡", "HKG": "香港",
-    "BKK": "曼谷", "AKL": "奧克蘭"
-}
 
-# 航空公司代碼對應
-AIRLINE_NAMES = {
-    "BR": "長榮航空", "CI": "中華航空", "JL": "日本航空",
-    "NH": "全日空", "KE": "大韓航空", "OZ": "韓亞航空",
-    "SQ": "新加坡航空", "CX": "國泰航空", "TG": "泰國航空",
-    "MM": "樂桃航空", "7C": "濟州航空", "IT": "台灣虎航"
-}
-
-def get_airport_name(code):
-    """取得機場中文名稱"""
-    return AIRPORT_NAMES.get(code, code)
-
-def get_airline_name(code):
-    """取得航空公司名稱"""
-    return AIRLINE_NAMES.get(code, code)
-
-def parse_duration(duration_str):
-    """解析 ISO 8601 duration (例如: PT15H30M) 轉換為小時"""
-    try:
-        # 移除 PT 前綴
-        duration_str = duration_str.replace('PT', '')
-        hours = 0
-        minutes = 0
-        
-        if 'H' in duration_str:
-            h_parts = duration_str.split('H')
-            hours = int(h_parts[0])
-            duration_str = h_parts[1] if len(h_parts) > 1 else ''
-        
-        if 'M' in duration_str:
-            minutes = int(duration_str.replace('M', ''))
-        
-        return hours + minutes / 60.0
-    except:
-        return 0
-
-def format_duration(hours):
-    """將小時數格式化為易讀格式"""
-    h = int(hours)
-    m = int((hours - h) * 60)
-    return f"{h}小時{m}分鐘"
-
-def get_time_period(time_str):
-    """判斷時間所屬時段"""
-    try:
-        hour = int(time_str.split('T')[1].split(':')[0])
-        if 6 <= hour < 12:
-            return "morning"
-        elif 12 <= hour < 18:
-            return "afternoon"
-        elif 18 <= hour < 24:
-            return "evening"
-        else:
-            return "night"
-    except:
-        return "unknown"
 
 class FlightInfo:
     """航班資訊類別"""

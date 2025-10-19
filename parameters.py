@@ -6,6 +6,36 @@
 AMADEUS_API_KEY = ""
 AMADEUS_API_SECRET = ""
 
+# API URLs (測試環境)
+TOKEN_URL = "https://test.api.amadeus.com/v1/security/oauth2/token"
+FLIGHT_SEARCH_URL = "https://test.api.amadeus.com/v2/shopping/flight-offers"
+
+# 檔案設定
+LAST_PRICE_FILE = "last_price.txt"
+HISTORY_LOG_FILE = "flight_history.txt"
+ERROR_LOG_FILE = "flight_error.txt"
+EMAIL_CONTENT_FILE = "email_content.txt"
+EXECUTION_LOG_FILE = "execution.log"
+
+# 機場代碼對應中文名稱
+AIRPORT_NAMES = {
+    "TPE": "台北桃園", "NRT": "東京成田", "HND": "東京羽田",
+    "KIX": "大阪關西", "NGO": "名古屋中部", "FUK": "福岡",
+    "CTS": "札幌新千歲", "ITM": "大阪伊丹", "OSA": "大阪",
+    "ICN": "首爾仁川", "SIN": "新加坡", "HKG": "香港",
+    "BKK": "曼谷", "AKL": "奧克蘭"
+}
+
+# 航空公司代碼對應
+AIRLINE_NAMES = {
+    "BR": "長榮航空", "CI": "中華航空", "JL": "日本航空",
+    "NH": "全日空", "KE": "大韓航空", "OZ": "韓亞航空",
+    "SQ": "新加坡航空", "CX": "國泰航空", "TG": "泰國航空",
+    "MM": "樂桃航空", "7C": "濟州航空", "IT": "台灣虎航"
+}
+
+
+
 # ========== 基本搜尋參數 ==========
 departure_place = "TPE"  # 台北
 destination_place = "NRT"  # 東京

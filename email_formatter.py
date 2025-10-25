@@ -61,7 +61,7 @@ class EmailFormatter:
         
         if flight.outbound_stops > 0:
             transit_airports = ', '.join([get_airport_name(seg['arrival']['iataCode']) 
-                                         for seg in flight.outbound_segments[:-1]])
+                                        for seg in flight.outbound_segments[:-1]])
             details.append(f"  轉機機場: {transit_airports}")
         
         # 回程資訊
@@ -75,10 +75,10 @@ class EmailFormatter:
             details.append(f"  抵達: {last_return['arrival']['at'].replace('T', ' ')[:16]} {get_airport_name(last_return['arrival']['iataCode'])}")
             details.append(f"  轉機: {'直飛' if flight.inbound_stops == 0 else f'{flight.inbound_stops}次'}")
             details.append(f"  飛行時間: {format_duration(flight.inbound_duration)}")
-            
+
             if flight.inbound_stops > 0:
                 transit_airports = ', '.join([get_airport_name(seg['arrival']['iataCode']) 
-                                             for seg in flight.inbound_segments[:-1]])
+                                            for seg in flight.inbound_segments[:-1]])
                 details.append(f"  轉機機場: {transit_airports}")
         
         return "\n".join(details)

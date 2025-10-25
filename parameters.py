@@ -3,8 +3,8 @@
 # reference location: [TPE, NRT, ICN, HND, KIX, NGO, FUK, CTS, ITM, OSA]
 
 # ========== Amadeus API 設定 ==========
-AMADEUS_API_KEY = ""
-AMADEUS_API_SECRET = ""
+AMADEUS_API_KEY = "DfS8EWTAgS2FJzp9dm7vew8sKwgtmBNK" # Amadeus API Key
+AMADEUS_API_SECRET = "rpXBRKkgbmDekuKx" # Amadeus API Secret
 
 # API URLs (測試環境)
 TOKEN_URL = "https://test.api.amadeus.com/v1/security/oauth2/token"

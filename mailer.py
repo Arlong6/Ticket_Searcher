@@ -5,7 +5,7 @@ def send_email(body):
     """發送 Email"""
     sender = "@gmail.com"
     receiver = "@gmail.com"
-    app_password = ""
+    app_password = "" # Gmail 應用程式密碼
     subject = "✈️ 機票價格通知"
 
     msg = MIMEText(body, 'plain', 'utf-8')
